@@ -1,0 +1,15 @@
+name: Build docker file
+on: [ pull_request ]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build dockerfile
+        run: docker build .
