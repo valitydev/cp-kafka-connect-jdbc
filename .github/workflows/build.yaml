@@ -1,9 +1,5 @@
-name: Master
-on:
-  push:
-    branches:
-      - 'master'
-      - 'main'
+name: Build docker file
+on: [ pull_request ]
 jobs:
   build:
     name: Build
