@@ -1,0 +1,16 @@
+name: PR
+on: [ pull_request ]
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy image
+        uses: valitydev/action-deploy-docker@v1.0.16
+        with:
+          registry-username: ${{ github.actor }}
+          registry-access-token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile-path: .
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+
