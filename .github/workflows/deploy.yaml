@@ -4,21 +4,17 @@ on:
     branches:
       - 'master'
       - 'main'
+
+env:
+  REGISTRY: ghcr.io
+
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Deploy image
-        uses: valitydev/action-deploy-docker@v2
+      - uses: valitydev/action-deploy-docker@v2
         with:
           registry-username: ${{ github.actor }}
           registry-access-token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile-path: .
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 
